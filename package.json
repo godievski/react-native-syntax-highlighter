@@ -1,5 +1,5 @@
 {
-  "name": "react-native-syntax-highlighter",
+  "name": "godievski-syntax-highlighter",
   "version": "2.0.0",
   "description": "a react native component for syntax highlighting",
   "main": "dist/index.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/conorhastings/react-native-syntax-highlighter.git"
+    "url": "git+https://github.com/godievski/react-native-syntax-highlighter.git"
   },
   "keywords": [
     "react",
