@@ -27,6 +27,39 @@ const topLevelPropertiesToRemove = [
   "fontFamily"
 ];
 
+// function getLineNumbers({ lines, startingLineNumber, style }) {
+//   return lines.map((_, i) => {
+//     const number = i + startingLineNumber;
+//     return (
+//       <Text
+//         key={`line-${i}`}
+//         className="react-syntax-highlighter-line-number"
+//         style={typeof style === 'function' ? style(number) : style}
+//       >
+//         {`${number}\n`}
+//       </Text>
+//     );
+//   });
+// }
+
+// function LineNumbers({
+//   codeString,
+//   codeStyle,
+//   containerStyle = { alignSelft: 'flex-start', paddingRight: 10 },
+//   numberStyle = {},
+//   startingLineNumber
+// }) {
+//   return (
+//     <Text style={Object.assign({}, codeStyle, containerStyle)}>
+//       {getLineNumbers({
+//         lines: codeString.replace(/\n$/, '').split('\n'),
+//         style: numberStyle,
+//         startingLineNumber
+//       })}
+//     </Text>
+//   );
+// }
+
 function generateNewStylesheet({ stylesheet, highlighter }) {
   if (styleCache.has(stylesheet)) {
     return styleCache.get(stylesheet);
@@ -93,7 +126,7 @@ function createChildren({ stylesheet, fontSize, fontFamily }) {
   }
 }
 
-function createNativeElement({ node, stylesheet, key, defaultColor, fontFamily, fontSize = 12 }) {
+function createNativeElement({ node, stylesheet, key, defaultColor, fontFamily, fontSize = 12 , index}) {
   const { properties, type, tagName: TagName, value } = node;
   const startingStyle = { fontFamily, fontSize, height: fontSize + 5 };
   if (type === 'text') {
@@ -102,7 +135,7 @@ function createNativeElement({ node, stylesheet, key, defaultColor, fontFamily, 
         key={key}
         style={Object.assign({ color: defaultColor }, startingStyle)}
       >
-        {value}
+        {`${index+1}|\n`}{value}
       </Text>
     );
   } else if (TagName) {
@@ -128,7 +161,8 @@ function nativeRenderer({ defaultColor, fontFamily, fontSize }) {
     key: `code-segment-${i}`,
     defaultColor,
     fontFamily,
-    fontSize
+    fontSize,
+    index: i,
   }))
 }
 
